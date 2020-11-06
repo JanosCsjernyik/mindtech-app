@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import PokemonListingPage from './pages/pokemonListingPage/PokemonListingPage'
+import PokemonDetailsPage from './pages/PokemonDetailsPage/PokemonDetailsPage'
 
-function App() {
+function App(): React.ReactElement {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/pokemon/:id" component={PokemonDetailsPage} />
+        <Route path="" component={PokemonListingPage} />
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
