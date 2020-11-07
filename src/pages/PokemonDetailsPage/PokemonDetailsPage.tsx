@@ -5,24 +5,17 @@ import { RootState } from '../../redux/reducers/rootReducer'
 import { catchPokemon, fetchPokemon, releasePokemon } from '../../redux/reducers/pokemon'
 import { PokemonDetails } from '../../api/pokemonAPI'
 import { isEqual } from 'lodash'
-import { Button, Card, Typography, IconButton } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import { useHistory } from 'react-router-dom'
+import Pokemoncard from './components/PokemonCard'
 
 const useStyles = makeStyles({
   flexCenter: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  card: {
-    padding: '1rem',
-    minWidth: '200px',
-  },
-  marginBottom: { marginBottom: '1rem' },
-  bold: {
-    fontWeight: 'bold',
   },
   back: {
     position: 'fixed',
@@ -43,7 +36,7 @@ const PokemonDetailsPage: React.FC = () => {
 
   const isPokemonCaught = caughtPokemons.find(caughtPokemon => isEqual(caughtPokemon, _pokemon))
 
-  const handlePokeBall = () => {
+  const handlePokeBall = (): void => {
     if (!isPokemonCaught) {
       dispatch(catchPokemon(_pokemon))
     } else {
@@ -60,37 +53,11 @@ const PokemonDetailsPage: React.FC = () => {
       <IconButton className={classes.back} onClick={() => history.goBack()}>
         <ArrowBackIosIcon />
       </IconButton>
-      <Card className={`${classes.card}`}>
-        <div className={classes.flexCenter}>
-          <img src={_pokemon?.picture} alt="Pokemon"></img>
-        </div>
-        <div className={classes.marginBottom}>
-          <Typography>Name: {_pokemon.name}</Typography>
-          <Typography>Height: {_pokemon.height}</Typography>
-          <Typography>Weight: {_pokemon.weight}</Typography>
-        </div>
-
-        <div className={classes.marginBottom}>
-          <Typography variant="body1" className={classes.bold}>
-            Abilities:{' '}
-          </Typography>
-          {_pokemon?.abilities?.map(ability =>
-            ability.is_hidden ? null : (
-              <Typography key={ability.ability.name}>{ability.ability.name}</Typography>
-            )
-          )}
-        </div>
-
-        <div className={classes.flexCenter}>
-          <Button
-            color={isPokemonCaught ? 'secondary' : 'primary'}
-            variant="contained"
-            onClick={handlePokeBall}
-          >
-            {isPokemonCaught ? 'Release' : 'Catch'}
-          </Button>
-        </div>
-      </Card>
+      <Pokemoncard
+        pokemon={_pokemon}
+        isPokemonCaught={isPokemonCaught}
+        handlePokeBall={handlePokeBall}
+      />
     </div>
   )
 }
