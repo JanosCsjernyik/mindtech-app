@@ -13,11 +13,16 @@ const useStyles = makeStyles({
   },
 })
 
+// The home page, with two components, PokemonPicker, PokemonList.
+// Using two local states here. So the PokemonList component can use it.
 const PokemonListingPage: React.FC = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const { types } = useSelector((state: RootState) => state.pokemons)
+
+  // Wired to the checkbox, on the PokemonPicker component.
   const [showOnlyCaught, setShowOnlyCaught] = useState(false)
+  // Wired to the search field, on the PokemonPicker component.
   const [searchTerm, setSearchTerm] = useState<null | string>(null)
 
   useEffect(() => {

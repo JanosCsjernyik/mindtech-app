@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { PokemonType } from '../redux/reducers/pokemon'
 
+// Creating an axios instance. With a baseUrl.
 const axiosInstance = axios.create({
   baseURL: 'https://pokeapi.co/api/v2/',
   headers: {
@@ -8,6 +9,7 @@ const axiosInstance = axios.create({
   },
 })
 
+// Pokemon types.
 export interface PokemonTypesResult {
   count: number
   next: null | boolean
@@ -47,6 +49,7 @@ export interface PokemonDetails {
   picture: string
 }
 
+// Collecting here all the Pokemon related API calls.
 export const getPokemonTypes = async (): Promise<PokemonTypesResult> => {
   try {
     const { data } = await axiosInstance.get<PokemonTypesResult>('type')

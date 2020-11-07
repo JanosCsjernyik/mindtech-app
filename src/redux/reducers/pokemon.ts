@@ -8,6 +8,7 @@ import {
 } from '../../api/pokemonAPI'
 import { PokemonListElement } from '../../api/pokemonAPI'
 
+// This file contains some of the pokemon types and the pokemon reducer
 export type PokemonType = {
   name: string
   url: string
@@ -47,6 +48,9 @@ function loadingFailed(state: PokemonState, action: PayloadAction<string>) {
   state.error = action.payload
 }
 
+// Redux toolkit reduces the boilerplate, creatSlice generates the reducer and the
+// actions too. Also, I can mutate the state because redux toolkit uses Immer in the
+// background.
 const pokemonSlice = createSlice({
   name: 'pokemons',
   initialState,
@@ -85,6 +89,8 @@ const pokemonSlice = createSlice({
     },
   },
 })
+
+// Collecting the actions.
 export const {
   getPokemonTypes,
   getPokemonTypesSuccess,
@@ -98,6 +104,7 @@ export const {
   releasePokemon,
 } = pokemonSlice.actions
 
+// In this section, I use the built in redux-thunk for async processes.
 export const fetchPokemonTypes = (): AppThunk => async dispatch => {
   try {
     dispatch(getPokemonTypes())

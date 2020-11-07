@@ -25,6 +25,7 @@ type PokemonCardProps = {
   handlePokeBall: () => void
 }
 
+// Displays the pokemon details.
 const Pokemoncard: React.FC<PokemonCardProps> = ({ pokemon, isPokemonCaught, handlePokeBall }) => {
   const classes = useStyles()
   return (

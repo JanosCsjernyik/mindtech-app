@@ -38,6 +38,7 @@ type PokemonListProps = {
   searchTerm: null | string
 }
 
+// Listing the pokemons.
 const PokemonList: React.FC<PokemonListProps> = ({ showOnlyCaught, searchTerm }) => {
   const history = useHistory()
   const dispatch = useDispatch()
@@ -47,6 +48,8 @@ const PokemonList: React.FC<PokemonListProps> = ({ showOnlyCaught, searchTerm })
     (state: RootState) => state.pokemons
   )
 
+  // Gets a pokemon, caught boolean, also checks if the pokemon name includes the search
+  // term that the user added. Returns the pokemon should appear ont he pokemon list.
   const setShow = (pokemon: PokemonListElement, caught: boolean): boolean => {
     if (showOnlyCaught) {
       return searchTerm ? pokemon.pokemon.name.includes(searchTerm) && caught : caught
@@ -63,10 +66,13 @@ const PokemonList: React.FC<PokemonListProps> = ({ showOnlyCaught, searchTerm })
     )
   }
 
+  // Creating an extended PokemonListElement with the show attribute.
+  // The item will only be rendered if show is true.
   const processedPokemonsByType = pokemonsByType.pokemons
     ? (pokemonsByType.pokemons as PokemonListElement[]).map(pokemon => {
+        // Checking if the pokemon is caught.
         const caught = !!caughtPokemons.find(
-          coughtPokemon => coughtPokemon.name === pokemon.pokemon.name
+          caughtPokemon => caughtPokemon.name === pokemon.pokemon.name
         )
         return {
           ...pokemon,
@@ -76,6 +82,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ showOnlyCaught, searchTerm })
       })
     : []
 
+  // Renders the pokemons depending on the show attribute.
   return (
     <div className={classes.wrapper}>
       {processedPokemonsByType.map(pokemon => {

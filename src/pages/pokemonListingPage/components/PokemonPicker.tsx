@@ -13,6 +13,7 @@ type PokemonPickerProps = {
   searchTerm: null | string
 }
 
+// Material ui, css in js solution.
 const useStyles = makeStyles({
   wrapper: {
     display: 'flex',
@@ -24,6 +25,7 @@ const useStyles = makeStyles({
   },
 })
 
+// This component collects the user input, what pokemon/pokemons should be listed.
 const PokemonPicker: React.FC<PokemonPickerProps> = ({
   pokemonTypes,
   setShowOnlyCaught,
@@ -35,10 +37,15 @@ const PokemonPicker: React.FC<PokemonPickerProps> = ({
   const dispatch = useDispatch()
   const { selectedPokemonType, pokemonsByType } = useSelector((state: RootState) => state.pokemons)
 
+  // This useEffect is responsible to handle data fetching.
+  // Only fetches if we don't have any pokemons fetched yet,
+  // or the user changes the pokemon type.
   useEffect(() => {
+    // Fetching if the user changes the pokemon types.
     if (selectedPokemonType && !pokemonsByType.id) {
       dispatch(fetchPokemonsByType(selectedPokemonType))
     }
+    // Fetching if the user loads the page first time.
     if (!selectedPokemonType && pokemonTypes.length) {
       dispatch(fetchPokemonsByType(pokemonTypes[0]))
     }

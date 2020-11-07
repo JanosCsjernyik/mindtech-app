@@ -24,6 +24,7 @@ const useStyles = makeStyles({
   },
 })
 
+// Detail page for the selected pokemon.
 const PokemonDetailsPage: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
@@ -36,6 +37,7 @@ const PokemonDetailsPage: React.FC = () => {
 
   const isPokemonCaught = caughtPokemons.find(caughtPokemon => isEqual(caughtPokemon, _pokemon))
 
+  // Catch ot release pokemon, depending on isPokemonCaught
   const handlePokeBall = (): void => {
     if (!isPokemonCaught) {
       dispatch(catchPokemon(_pokemon))
@@ -44,6 +46,7 @@ const PokemonDetailsPage: React.FC = () => {
     }
   }
 
+  // Loads the pokemon by id, on the first page render.
   useEffect(() => {
     dispatch(fetchPokemon(id))
   }, [dispatch, id])
