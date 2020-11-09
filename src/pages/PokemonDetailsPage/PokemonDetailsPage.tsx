@@ -9,7 +9,7 @@ import { IconButton } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import { useHistory } from 'react-router-dom'
-import Pokemoncard from './components/PokemonCard'
+import PokemonCard from './components/PokemonCard'
 
 const useStyles = makeStyles({
   flexCenter: {
@@ -56,7 +56,7 @@ const PokemonDetailsPage: React.FC = () => {
       <IconButton className={classes.back} onClick={() => history.goBack()}>
         <ArrowBackIosIcon />
       </IconButton>
-      <Pokemoncard
+      <PokemonCard
         pokemon={_pokemon}
         isPokemonCaught={isPokemonCaught}
         handlePokeBall={handlePokeBall}

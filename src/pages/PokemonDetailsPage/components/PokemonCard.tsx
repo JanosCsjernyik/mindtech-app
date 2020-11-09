@@ -26,7 +26,7 @@ type PokemonCardProps = {
 }
 
 // Displays the pokemon details.
-const Pokemoncard: React.FC<PokemonCardProps> = ({ pokemon, isPokemonCaught, handlePokeBall }) => {
+const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, isPokemonCaught, handlePokeBall }) => {
   const classes = useStyles()
   return (
     <Card className={`${classes.card}`}>
@@ -63,6 +63,6 @@ const Pokemoncard: React.FC<PokemonCardProps> = ({ pokemon, isPokemonCaught, han
   )
 }
 
-Pokemoncard.propTypes = {}
+PokemonCard.propTypes = {}
 
-export default Pokemoncard
+export default PokemonCard
